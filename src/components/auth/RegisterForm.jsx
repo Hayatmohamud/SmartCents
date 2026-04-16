@@ -13,9 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
 
-import api from "../../lib/api/apiClient";
+import api from "../../lib/apiClient";
 
-import { extractErrorMessages } from "../../util/errorUtils";
+import { extractErrorMessages } from "../../utils/errorUtils";
 
 const RegisterForm = () => {
   const navigate = useNavigate();

@@ -1,27 +1,16 @@
 import axios from "axios";
-import useAuthStore from "../store/authStore";
-
-const API_URL = "https://finance-tracker-29wp.onrender.com/api";
 
 const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: "http://localhost:5000/api",
 });
 
-// Interceptor to add the Authorization header
-
+// Kani wuxuu Token-ka ka soo qabanayaa LocalStorage ka hor codsi kasta
 api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token;
-
+  const token = localStorage.getItem("token"); // Hubi magaca aad u bixisay
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 });
-
-// Request or response interceptor to add the token
 
 export default api;

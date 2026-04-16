@@ -3,39 +3,19 @@ import { persist } from "zustand/middleware";
 
 const useAuthStore = create(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
       token: null,
-      isAuthenticated: false,
-
-      // Set user data and token after successfully login
-
-      setAuth: (userData, token) =>
-        set({
-          user: userData,
-          token,
-          isAuthenticated: true,
-        }),
-
-      // clear user data and token after logout
-
-      clearAuth: () =>
-        set({
-          user: null,
-          token: null,
-          isAuthenticated: false,
-        }),
-
-      // Get token (for use outside of React components)
-      getToken: () => get().token,
+      // Hubi in magacyada (user, token) ay is leeyihiin
+      setAuth: (userData, tokenData) =>
+        set({ user: userData, token: tokenData }),
+      logout: () => {
+        set({ user: null, token: null });
+        localStorage.removeItem("auth-storage");
+      },
     }),
     {
-      name: "auth-storage",
-      partialize: (state) => ({
-        user: state.user,
-        token: state.token,
-        isAuthenticated: state.isAuthenticated,
-      }),
+      name: "auth-storage", // Tani waxay xogta ku dhex kaydinaysaa LocalStorage
     },
   ),
 );

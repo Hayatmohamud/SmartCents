@@ -10,17 +10,16 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export default defineConfig({
-  plugins: [react(),
-     tailwindcss()
-    ],
+  server: {
+    proxy: {
+      "/api": "http://localhost:5000", // Halkan geli Port-ka uu backend-kaagu ku shaqaynayo
+    },
+  },
+  plugins: [react(), tailwindcss()],
 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-  },
-  server: {
-    port: 3000,
-    open: true, // Markaad run dhahdo isaga ayaa kuu furaya Browser-ka
   },
 });
