@@ -2,6 +2,21 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useAddTransaction } from "../hooks/useTransactions";
 
+const CATEGORIES = {
+  income: ["Salary", "Freelance", "Investment", "Gift", "Other"],
+  expense: [
+    "Food",
+    "Transport",
+    "Housing",
+    "Entertainment",
+    "Shopping",
+    "Health",
+    "Education",
+    "Bills",
+    "Other",
+  ],
+};
+
 const AddTransactionModal = () => {
   const { mutate, isPending } = useAddTransaction();
   const [open, setOpen] = useState(false);
@@ -15,9 +30,20 @@ const AddTransactionModal = () => {
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "type") {
+      setFormData((prev) => ({
+        ...prev,
+        type: value,
+        category: "",
+      }));
+      return;
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
@@ -48,6 +74,8 @@ const AddTransactionModal = () => {
     );
   };
 
+  const categoryOptions = CATEGORIES[formData.type] || [];
+
   return (
     <>
       <button
@@ -66,6 +94,7 @@ const AddTransactionModal = () => {
                 Add Transaction
               </h2>
               <button
+                type="button"
                 onClick={() => setOpen(false)}
                 className="text-slate-500 hover:text-slate-700"
               >
@@ -102,14 +131,19 @@ const AddTransactionModal = () => {
                 <option value="expense">Expense</option>
               </select>
 
-              <input
-                type="text"
+              <select
                 name="category"
-                placeholder="Category"
                 value={formData.category}
                 onChange={handleChange}
                 className="rounded-xl border border-slate-200 px-4 py-3"
-              />
+              >
+                <option value="">Select Category</option>
+                {categoryOptions.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
 
               <input
                 type="date"
