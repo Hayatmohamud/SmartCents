@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import SummaryCards from "../components/SummaryCards";
-import RecentTransactions from "../components/RecentTransactions";
 import AddTransactionModal from "../components/AddTransactionModal";
 import EditTransactionModal from "../components/EditTransactionModal";
 import {
@@ -50,19 +49,6 @@ const DashboardPage = () => {
             <p className="text-red-600">Failed to load summary</p>
           ) : (
             <SummaryCards summary={summary} transactions={transactions} />
-          )}
-        </div>
-
-        <div>
-          {txLoading ? (
-            <p>Loading transactions...</p>
-          ) : txError ? (
-            <p className="text-red-600">Failed to load transactions</p>
-          ) : (
-            <RecentTransactions
-              transactions={transactions}
-              onEdit={setEditingItem}
-            />
           )}
         </div>
         <TransactionsTable
