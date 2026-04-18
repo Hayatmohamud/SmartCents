@@ -8,6 +8,7 @@ import {
   useGetTransactions,
   useMonthlySummary,
 } from "../hooks/useTransactions";
+import TransactionsTable from "../components/TransactionsTable";
 
 const DashboardPage = () => {
   const [editingItem, setEditingItem] = useState(null);
@@ -64,6 +65,10 @@ const DashboardPage = () => {
             />
           )}
         </div>
+        <TransactionsTable
+          transactions={transactions}
+          onEdit={setEditingItem}
+        />
       </section>
 
       {editingItem && (
