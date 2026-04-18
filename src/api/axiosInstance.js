@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../lib/token";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://finance-tracker-29wp.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },

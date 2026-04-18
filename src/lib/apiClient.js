@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://finance-tracker-1-1wka.onrender.com/api",
 });
 
 // Kani wuxuu Token-ka ka soo qabanayaa LocalStorage ka hor codsi kasta
